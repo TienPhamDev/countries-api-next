@@ -2,6 +2,7 @@ import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Nunito_Sans } from "next/font/google";
 import StoreProvider from "./StoreProvider";
+import { ThemeProvider } from "./ThemeProvider";
 import Header from "@/components/header/Header";
 const nunito = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -15,10 +16,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${nunito.variable} antialiased`}>
         <Header />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
