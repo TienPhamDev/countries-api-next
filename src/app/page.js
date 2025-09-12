@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Counter from "../components/Counter";
 import StoreProvider from "./StoreProvider";
 import { fetchAllCountry } from "./action";
+import Search from "@/components/ui/search/Search";
 export default function Home() {
   const [countries, setCountries] = useState(null);
   const fetchDataCountry = async () => {
@@ -16,8 +17,8 @@ export default function Home() {
   return (
     <>
       <StoreProvider>
-        <main>
-          <h1>Nunito</h1>
+        <main className="py-10 px-12">
+          <Search />
         </main>
       </StoreProvider>
     </>
