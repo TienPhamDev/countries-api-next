@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <StoreProvider>
         <main>
-          <h1>Home</h1>
+          <h1>Nunito</h1>
           {/* <Counter /> */}
         </main>
       </StoreProvider>
