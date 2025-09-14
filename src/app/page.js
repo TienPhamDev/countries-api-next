@@ -1,22 +1,32 @@
 import StoreProvider from "./StoreProvider";
 import Search from "@/components/search/Search";
 import FilterByRegion from "@/components/filterbyregion/FilterByRegion";
-import CountryCard from "@/components/countrycard/CountryCard";
+import CountryCard from "@/components/countryItem/CountryItem";
 import PaginationPage from "@/components/paginationpage/PaginationPage";
 export async function fetchAllCountry() {
   const res = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,flags,capital,population,region",
+    "https://restcountres.com/v3.1/all?fields=name,flags,capital,population,region",
     {
       method: "GET",
     }
   );
+  if (!res.ok) {
+    const errorBody = await res.text();
+    throw new Error(errorBody);
+  }
   const data = await res.json();
   return data;
 }
 
 export default async function Home() {
-  const data = await fetchAllCountry();
-  console.log(data);
+  let data = [];
+  let errorMsg = "";
+  try {
+    data = await fetchAllCountry();
+  } catch (error) {
+    errorMsg = error.message;
+  }
+
   return (
     <>
       <StoreProvider>
@@ -26,6 +36,7 @@ export default async function Home() {
             <FilterByRegion />
           </section>
           <section className="grid grid-cols-4 gap-18 pt-10">
+            {errorMsg && <div>{errorMsg}</div>}
             {/* {data.map((country, index) => {
               if (index < 8) {
                 return (

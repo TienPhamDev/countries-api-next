@@ -1,18 +1,27 @@
 "use client";
-import { useState } from "react";
-
-const itemsPerPage = 10; // Number of items per page
+import { useEffect, useState } from "react";
+import Link from "next/link";
+const itemsPerPage = 8; // Number of items per page
 
 export default function PaginationPage({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
-
-  // Calculate total pages
+  let startIdx = (currentPage - 1) * itemsPerPage; //keep track of index in country data
+  let currentData = data.slice(startIdx, startIdx + itemsPerPage);
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  // Get current page data
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
+  const handlePrevious = () => {
+    setCurrentPage(currentPage - 1);
+  };
+  const handleNext = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+
+  /*Pagination Page controls*/
+  const paginationPage = [...Array(totalPages)].map(
+    (page, index) => (page = index + 1)
+  );
+  let strIdxPages = currentPage - 1;
+  let paginationPageData = paginationPage.slice(strIdxPages, strIdxPages + 3);
 
   return (
     <div>
@@ -22,19 +31,23 @@ export default function PaginationPage({ data }) {
       ))}
 
       {/* Pagination controls */}
-      <button
-        onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-        disabled={currentPage === 1}
-      >
+      <button onClick={handlePrevious} disabled={currentPage === 1}>
         Previous
       </button>
       <span>
-        Page {currentPage} of {totalPages}
+        {paginationPageData.map((item, idx) => {
+          return (
+            <Link key={idx} href={"#"} onClick={() => setCurrentPage(item)}>
+              {item}
+            </Link>
+          );
+        })}
+        <span>...</span>
+        <Link href={"#"} onClick={() => setCurrentPage(totalPages)}>
+          {totalPages}
+        </Link>
       </span>
-      <button
-        onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-        disabled={currentPage === totalPages}
-      >
+      <button onClick={handleNext} disabled={currentPage > totalPages}>
         Next
       </button>
     </div>
