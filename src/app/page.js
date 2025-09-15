@@ -3,6 +3,7 @@ import Search from "@/components/search/Search";
 import FilterByRegion from "@/components/filterbyregion/FilterByRegion";
 import CountryCard from "@/components/countryItem/CountryItem";
 import PaginationPage from "@/components/paginationpage/PaginationPage";
+import CountryList from "@/components/countrylist/CountryList";
 export async function fetchAllCountry() {
   const res = await fetch(
     "https://restcountres.com/v3.1/all?fields=name,flags,capital,population,region",
@@ -35,17 +36,8 @@ export default async function Home() {
             <Search />
             <FilterByRegion />
           </section>
-          <section className="grid grid-cols-4 gap-18 pt-10">
-            {errorMsg && <div>{errorMsg}</div>}
-            {/* {data.map((country, index) => {
-              if (index < 8) {
-                return (
-                  <CountryCard key={country.name + index} data={country} />
-                );
-              }
-            })} */}
-            <PaginationPage data={data} />
-          </section>
+          <CountryList countries={data} />
+          <PaginationPage data={data} />
         </main>
       </StoreProvider>
     </>
