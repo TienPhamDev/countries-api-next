@@ -30,8 +30,8 @@ export default async function Home() {
   return (
     <>
       <StoreProvider>
-        <main className="py-10 px-12">
-          <section className="flex justify-between">
+        <main className="py-10 md:px-12 px-2">
+          <section className="flex justify-between flex-col md:flex-row gap-4">
             <Search />
             <FilterByRegion />
           </section>
