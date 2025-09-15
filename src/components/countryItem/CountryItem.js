@@ -16,8 +16,10 @@ const CountryCard = ({ data }) => {
           />
         </div>
       </CardHeader>
-      <CardContent className={"px-0 h-36"}>
-        <CardTitle>{data.name.common}</CardTitle>
+      <CardContent className={"px-2 h-36"}>
+        <CardTitle className={"font-bold text-xl py-2"}>
+          {data.name.common}
+        </CardTitle>
         <p>
           <strong>Population:</strong> {data.population}
         </p>

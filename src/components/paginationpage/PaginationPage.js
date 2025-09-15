@@ -41,7 +41,11 @@ export default function PaginationPage() {
       ))} */}
 
       {/* Pagination controls */}
-      <Button onClick={handlePrevious} disabled={currentPage === 1}>
+      <Button
+        onClick={handlePrevious}
+        variant={"outline"}
+        disabled={currentPage === 1}
+      >
         Previous
       </Button>
       <span>
@@ -57,7 +61,11 @@ export default function PaginationPage() {
           {totalPages}
         </Link>
       </span>
-      <Button onClick={handleNext} disabled={currentPage > totalPages}>
+      <Button
+        onClick={handleNext}
+        variant={"outline"}
+        disabled={currentPage > totalPages}
+      >
         Next
       </Button>
     </div>
