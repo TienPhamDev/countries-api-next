@@ -28,7 +28,7 @@ export default async function Home() {
   } catch (error) {
     errorMsg = error.message;
   }
-
+  console.log(data);
   return (
     <>
       <StoreProvider>
