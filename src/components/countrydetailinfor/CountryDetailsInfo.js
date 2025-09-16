@@ -1,7 +1,21 @@
-const CountryDetailsInfo = ({ data, ...props }) => {
-  const border = data.borders;
-  const cca3 = data.cca3;
+"use client";
+import { useAppSelector } from "@/redux/hooks";
 
+const CountryDetailsInfo = ({ data, ...props }) => {
+  const countriesRedux = useAppSelector(
+    (state) => state.countries.countriesRedux
+  );
+  const borders = data.borders;
+  let nameBorderCountries = [];
+  borders.forEach((countryCCA3) => {
+    const country = countriesRedux.find(
+      (element) => element.cca3 === countryCCA3
+    );
+    if (country) {
+      nameBorderCountries.push(country.name.common);
+    }
+  });
+  console.log(nameBorderCountries);
   //get Native Name of the country in data
   const nativeNameObj = data.name.nativeName;
   const nativeNameEntries = Object.entries(nativeNameObj);
@@ -42,8 +56,16 @@ const CountryDetailsInfo = ({ data, ...props }) => {
       </div>
       <div>
         <span>
-          Border Countries :{" "}
-          {border === undefined ? "No border with any country." : border}
+          <strong>Border Countries:</strong>{" "}
+          {borders === undefined ? (
+            "No border with any country."
+          ) : (
+            <>
+              {nameBorderCountries.map((country, idx) => {
+                return <span key={idx}>{country}</span>;
+              })}
+            </>
+          )}
         </span>
       </div>
     </div>
