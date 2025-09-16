@@ -27,7 +27,7 @@ const MainComponent = ({ data }) => {
       </section>
       <PaginationPageProvider data={countriesData}>
         <CountryList />
-        <PaginationPage data={countriesData} />
+        <PaginationPage />
       </PaginationPageProvider>
     </main>
   );
