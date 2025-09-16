@@ -42,11 +42,12 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-blue-900: #2b3844;
+  --color-grey-50: #fcfcfc;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: var(--color-grey-50);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
@@ -80,6 +81,7 @@
 }
 
 .dark {
+  --color-grey-50: #fcfcfc;
   --color-blue-900: #2b3844;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);

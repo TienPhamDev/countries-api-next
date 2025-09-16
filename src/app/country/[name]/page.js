@@ -8,14 +8,11 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 const DetailsCountryPage = async ({ params }) => {
-  const countryName = await params.name;
-  const res = await fetch(
-    `https://restcountries.com/v3.1/name/${countryName}`,
-    {
-      method: "GET",
-      cache: "force-cache",
-    }
-  );
+  const { name } = await params;
+  const res = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
+    method: "GET",
+    cache: "force-cache",
+  });
   const data = await res.json();
   console.log(data);
   const border = data[0].borders;
@@ -24,7 +21,7 @@ const DetailsCountryPage = async ({ params }) => {
     <section className="px-12">
       <BackButton />
       <div className="h-72  flex justify-between items-center flex-col md:flex-row">
-        <div id="flags" className="relative w-[45%] h-full">
+        <div id="flags" className="relative w-[46%] h-full">
           <Image
             src={`${data[0].flags.svg}`}
             alt="flags"
@@ -33,20 +30,43 @@ const DetailsCountryPage = async ({ params }) => {
             className="rounded-[5px]"
           />
         </div>
-        <Card id="country-details" className="w-[45%]">
-          <CardHeader>
-            <CardTitle className="font-bold text-xl">
-              {data[0].name.official}
-            </CardTitle>
-          </CardHeader>
-          <CardContent></CardContent>
-          <CardFooter>
+        <div id="country-details" className="w-[46%] flex flex-col gap-4">
+          <h1 className="font-bold text-2xl">{data[0].name.official}</h1>
+
+          <div className="grid grid-cols-2">
+            <div>
+              <p>
+                <strong>Native name:</strong> {data[0].name.common}
+              </p>
+              <p>
+                <strong>Population:</strong> {data[0].population}
+              </p>
+              <p>
+                <strong>Region:</strong> {data[0].region}
+              </p>
+              <p>
+                <strong>Sub Region:</strong> {data[0].subregion}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Top Level Domain:</strong> {data[0].subregion}
+              </p>
+              <p>
+                <strong>Curencies:</strong> {data[0].subregion}
+              </p>
+              <p>
+                <strong>Languages:</strong> {data[0].subregion}
+              </p>
+            </div>
+          </div>
+          <div>
             <span>
-              Border :{" "}
+              Border Countries :{" "}
               {border === undefined ? "No border with any country." : border}
             </span>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </div>
     </section>
   );
