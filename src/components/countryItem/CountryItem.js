@@ -10,6 +10,7 @@ const CountryCard = ({ data }) => {
         <div className="relative w-full h-32">
           <Image
             src={`${data.flags.svg}`}
+            priority={true}
             alt="flag"
             fill
             style={{ objectFit: "cover" }}

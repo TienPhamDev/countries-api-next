@@ -32,6 +32,7 @@ const DetailsCountryPage = async ({ params }) => {
         <div id="flags" className="relative w-[46%] h-full">
           <Image
             src={`${data[0].flags.svg}`}
+            priority={false}
             alt="flags"
             fill
             style={{ objectFit: "cover" }}
