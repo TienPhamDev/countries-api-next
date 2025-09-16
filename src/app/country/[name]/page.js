@@ -16,7 +16,15 @@ const DetailsCountryPage = async ({ params }) => {
   const data = await res.json();
   console.log(data);
   const border = data[0].borders;
-  console.log(border);
+  const cca3 = data[0].cca3;
+
+  //get Native Name of the country in data
+  const nativeNameObj = data[0].name.nativeName;
+  const nativeNameEntries = Object.entries(nativeNameObj);
+  const [lastNativeNameKey, lastNativeNameValue] =
+    nativeNameEntries[nativeNameEntries.length - 1];
+  const nativeName = data[0].name.nativeName[lastNativeNameKey].common;
+
   return (
     <section className="px-12">
       <BackButton />
@@ -36,7 +44,7 @@ const DetailsCountryPage = async ({ params }) => {
           <div className="grid grid-cols-2">
             <div>
               <p>
-                <strong>Native name:</strong> {data[0].name.common}
+                <strong>Native name:</strong> {nativeName}
               </p>
               <p>
                 <strong>Population:</strong> {data[0].population}
