@@ -1,4 +1,5 @@
 import BackButton from "@/components/backbutton/BackButton";
+import CountryDetailsInfo from "@/components/countrydetailinfor/CountryDetailsInfo";
 import {
   Card,
   CardContent,
@@ -6,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 const DetailsCountryPage = async ({ params }) => {
   const { name } = await params;
@@ -14,16 +16,6 @@ const DetailsCountryPage = async ({ params }) => {
     cache: "force-cache",
   });
   const data = await res.json();
-  console.log(data);
-  const border = data[0].borders;
-  const cca3 = data[0].cca3;
-
-  //get Native Name of the country in data
-  const nativeNameObj = data[0].name.nativeName;
-  const nativeNameEntries = Object.entries(nativeNameObj);
-  const [lastNativeNameKey, lastNativeNameValue] =
-    nativeNameEntries[nativeNameEntries.length - 1];
-  const nativeName = data[0].name.nativeName[lastNativeNameKey].common;
 
   return (
     <section className="px-12">
@@ -39,43 +31,11 @@ const DetailsCountryPage = async ({ params }) => {
             className="rounded-[5px]"
           />
         </div>
-        <div id="country-details" className="w-[46%] flex flex-col gap-4">
-          <h1 className="font-bold text-2xl">{data[0].name.official}</h1>
-
-          <div className="grid grid-cols-2">
-            <div>
-              <p>
-                <strong>Native name:</strong> {nativeName}
-              </p>
-              <p>
-                <strong>Population:</strong> {data[0].population}
-              </p>
-              <p>
-                <strong>Region:</strong> {data[0].region}
-              </p>
-              <p>
-                <strong>Sub Region:</strong> {data[0].subregion}
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>Top Level Domain:</strong> {data[0].subregion}
-              </p>
-              <p>
-                <strong>Curencies:</strong> {data[0].subregion}
-              </p>
-              <p>
-                <strong>Languages:</strong> {data[0].subregion}
-              </p>
-            </div>
-          </div>
-          <div>
-            <span>
-              Border Countries :{" "}
-              {border === undefined ? "No border with any country." : border}
-            </span>
-          </div>
-        </div>
+        <CountryDetailsInfo
+          id="country-details"
+          className="w-[46%] flex flex-col gap-4"
+          data={data[0]}
+        />
       </div>
     </section>
   );
