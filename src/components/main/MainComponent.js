@@ -6,16 +6,17 @@ import PaginationPage from "@/components/paginationpage/PaginationPage";
 import CountryList from "@/components/countrylist/CountryList";
 import { PaginationPageProvider } from "@/context/paginationPageContext";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { setCountries } from "@/redux/slices/countries.slice";
 const MainComponent = ({ data }) => {
   const dispatch = useAppDispatch();
   const initialized = useRef(false);
-  if (!initialized.current) {
-    dispatch(setCountries(data));
-    initialized.current = true;
-  }
-
+  useEffect(() => {
+    if (!initialized.current) {
+      dispatch(setCountries(data));
+      initialized.current = true;
+    }
+  }, [data, dispatch]);
   const countriesData = useAppSelector(
     (state) => state.countries.countriesRedux
   );

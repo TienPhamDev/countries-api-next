@@ -27,9 +27,7 @@ export default async function Home() {
   console.log(data);
   return (
     <>
-      <StoreProvider>
-        <MainComponent data={data} />
-      </StoreProvider>
+      <MainComponent data={data} />
     </>
   );
 }

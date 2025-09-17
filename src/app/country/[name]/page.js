@@ -19,28 +19,26 @@ const DetailsCountryPage = async ({ params }) => {
   const data = await res.json();
 
   return (
-    <StoreProvider>
-      <section className="px-12">
-        <BackButton />
-        <div className="h-72  flex justify-between items-center flex-col md:flex-row">
-          <div id="flags" className="relative w-[46%] h-full">
-            <Image
-              src={`${data[0].flags.svg}`}
-              priority={false}
-              alt="flags"
-              fill
-              style={{ objectFit: "cover" }}
-              className="rounded-[5px]"
-            />
-          </div>
-          <CountryDetailsInfo
-            id="country-details"
-            className="w-[46%] flex flex-col gap-4"
-            data={data[0]}
+    <section className="px-12">
+      <BackButton />
+      <div className="h-72  flex justify-between items-center flex-col md:flex-row">
+        <div id="flags" className="relative w-[46%] h-full">
+          <Image
+            src={`${data[0].flags.svg}`}
+            priority={false}
+            alt="flags"
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-[5px]"
           />
         </div>
-      </section>
-    </StoreProvider>
+        <CountryDetailsInfo
+          id="country-details"
+          className="w-[46%] flex flex-col gap-4"
+          data={data[0]}
+        />
+      </div>
+    </section>
   );
 };
 

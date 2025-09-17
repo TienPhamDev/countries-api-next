@@ -2,20 +2,27 @@
 import { useAppSelector } from "@/redux/hooks";
 
 const CountryDetailsInfo = ({ data, ...props }) => {
-  const countriesRedux = useAppSelector(
-    (state) => state.countries.countriesRedux
+  const { countriesRedux } = useAppSelector((state) => state.countries);
+  console.log(
+    "Redux countries:",
+    countriesRedux.map((c) => c.cca3)
   );
   const borders = data.borders;
   let nameBorderCountries = [];
-  borders.forEach((countryCCA3) => {
-    const country = countriesRedux.find(
-      (element) => element.cca3 === countryCCA3
-    );
-    if (country) {
-      nameBorderCountries.push(country.name.common);
-    }
-  });
-  console.log(nameBorderCountries);
+  console.log(borders);
+  if (Array.isArray(borders) && borders.length > 0) {
+    borders.forEach((countryCCA3) => {
+      console.log("Border code:", countryCCA3);
+      const country = countriesRedux.find(
+        (element) => element.cca3.toLowerCase() === countryCCA3.toLowerCase()
+      );
+      console.log(country);
+      if (country) {
+        nameBorderCountries.push(country.name.common);
+      }
+    });
+  }
+  // console.log(nameBorderCountries);
   //get Native Name of the country in data
   const nativeNameObj = data.name.nativeName;
   const nativeNameEntries = Object.entries(nativeNameObj);
@@ -57,7 +64,7 @@ const CountryDetailsInfo = ({ data, ...props }) => {
       <div>
         <span>
           <strong>Border Countries:</strong>{" "}
-          {borders === undefined ? (
+          {borders === undefined || borders.length === 0 ? (
             "No border with any country."
           ) : (
             <>
