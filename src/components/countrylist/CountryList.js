@@ -8,7 +8,7 @@ const CountryList = () => {
   const { currentData } = useContext(PaginationPageContext);
 
   return (
-    <section className="grid grid-cols-4 gap-18 pt-10">
+    <section className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-18 pt-10">
       {currentData.map((country, index) => {
         return <CountryCard key={country.name + index} data={country} />;
       })}
