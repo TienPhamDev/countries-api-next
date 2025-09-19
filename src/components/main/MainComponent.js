@@ -22,7 +22,7 @@ const MainComponent = ({ data }) => {
   );
   return (
     <section className="md:py-10">
-      <section className="flex justify-between flex-col md:flex-row gap-4">
+      <section className="flex py-6 justify-between flex-col md:flex-row gap-4">
         <Search />
         <FilterByRegion />
       </section>
