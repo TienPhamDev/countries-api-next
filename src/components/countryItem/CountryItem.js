@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const { Card, CardHeader, CardTitle, CardContent } = require("../ui/card");
 
@@ -9,6 +10,7 @@ const CountryCard = ({ data }) => {
         <div className="relative w-full h-32">
           <Image
             src={`${data.flags.svg}`}
+            priority={true}
             alt="flag"
             fill
             style={{ objectFit: "cover" }}
@@ -16,10 +18,15 @@ const CountryCard = ({ data }) => {
           />
         </div>
       </CardHeader>
-      <CardContent className={"px-2 h-36"}>
-        <CardTitle className={"font-bold text-xl py-2"}>
-          {data.name.common}
-        </CardTitle>
+      <CardContent className={"px-10 h-36"}>
+        <div className="py-2">
+          <Link
+            className="font-bold text-xl"
+            href={`/country/${data.name.common}`}
+          >
+            {data.name.common}
+          </Link>
+        </div>
         <p>
           <strong>Population:</strong> {data.population}
         </p>
