@@ -7,7 +7,7 @@ export default function BackButton() {
   const router = useRouter();
 
   return (
-    <div className="py-20">
+    <div className="lg:py-20 md:py-16 py-12">
       <Button
         className={"dark:text-primary text-blue-950 dark:bg-blue-900"}
         variant={"default"}

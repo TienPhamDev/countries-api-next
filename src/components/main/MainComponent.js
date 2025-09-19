@@ -21,7 +21,7 @@ const MainComponent = ({ data }) => {
     (state) => state.countries.countriesRedux
   );
   return (
-    <main className="py-10 md:px-12 px-2">
+    <section className="md:py-10">
       <section className="flex justify-between flex-col md:flex-row gap-4">
         <Search />
         <FilterByRegion />
@@ -30,7 +30,7 @@ const MainComponent = ({ data }) => {
         <CountryList />
         <PaginationPage />
       </PaginationPageProvider>
-    </main>
+    </section>
   );
 };
 

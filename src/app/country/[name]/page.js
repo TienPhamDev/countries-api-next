@@ -19,10 +19,10 @@ const DetailsCountryPage = async ({ params }) => {
   const data = await res.json();
 
   return (
-    <section className="px-12">
+    <section className="">
       <BackButton />
-      <div className="h-72  flex justify-between items-center flex-col md:flex-row">
-        <div id="flags" className="relative w-[46%] h-full">
+      <div className="lg:h-82 h-full  flex lg:justify-between gap-16 items-center flex-col lg:flex-row">
+        <div id="flags" className="relative lg:w-[47%] h-72 lg:h-full w-full">
           <Image
             src={`${data[0].flags.svg}`}
             priority={false}
@@ -34,7 +34,7 @@ const DetailsCountryPage = async ({ params }) => {
         </div>
         <CountryDetailsInfo
           id="country-details"
-          className="w-[46%] flex flex-col gap-4"
+          className="lg:w-[47%] w-full flex flex-col gap-4"
           data={data[0]}
         />
       </div>

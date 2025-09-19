@@ -7,7 +7,7 @@ import { use } from "react";
 const Header = () => {
   const { setTheme, resolvedTheme } = useTheme();
   return (
-    <header className="flex justify-between items-center h-20 dark:bg-[#2B3844] px-10 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+    <header className="flex justify-between items-center h-20 dark:bg-[#2B3844] md:px-12 px-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
       <h1 className="font-extrabold text-xl">Where in the world ?</h1>
 
       <Button
