@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   countriesRedux: [],
   filterCountriesData: [],
+  filterRegion: "all",
   errorSearchByName: null,
 };
 
@@ -30,8 +31,26 @@ export const countriesSlice = createSlice({
         state.filterCountriesData = filterByName;
       }
     },
+    filterRegion: (state, action) => {
+      state.filterRegion = action.payload;
+      const region = state.filterRegion;
+      if (region === "all") {
+        state.filterCountriesData = state.countriesRedux.map(
+          (country) => country
+        );
+      } else {
+        const filterByRegion = state.countriesRedux.filter(
+          (country) => country.region.toLowerCase() === region.toLowerCase()
+        );
+        state.filterCountriesData = filterByRegion.map((country) => country);
+      }
+    },
   },
 });
-export const { setCountries, setFilterCountriesData, filterDataByName } =
-  countriesSlice.actions;
+export const {
+  setCountries,
+  setFilterCountriesData,
+  filterDataByName,
+  filterRegion,
+} = countriesSlice.actions;
 export default countriesSlice.reducer;
