@@ -23,7 +23,9 @@ export const countriesSlice = createSlice({
       );
       if (filterByName.length === 0) {
         state.errorSearchByName = "No country found.";
-        state.filterCountriesData.push();
+        state.filterCountriesData = state.countriesRedux.map(
+          (country) => country
+        );
       } else {
         state.filterCountriesData = filterByName;
       }
