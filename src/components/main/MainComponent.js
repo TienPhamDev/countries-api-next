@@ -7,26 +7,28 @@ import CountryList from "@/components/countrylist/CountryList";
 import { PaginationPageProvider } from "@/context/paginationPageContext";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRef, useEffect } from "react";
-import { setCountries } from "@/redux/slices/countries.slice";
+import {
+  setCountries,
+  setFilterCountriesData,
+} from "@/redux/slices/countries.slice";
 const MainComponent = ({ data }) => {
   const dispatch = useAppDispatch();
   const initialized = useRef(false);
   useEffect(() => {
     if (!initialized.current) {
       dispatch(setCountries(data));
+      dispatch(setFilterCountriesData(data));
       initialized.current = true;
     }
   }, [data, dispatch]);
-  const countriesData = useAppSelector(
-    (state) => state.countries.countriesRedux
-  );
+  const { filterCountriesData } = useAppSelector((state) => state.countries);
   return (
     <section className="md:py-10">
       <section className="flex py-6 justify-between flex-col md:flex-row gap-4">
         <Search />
         <FilterByRegion />
       </section>
-      <PaginationPageProvider data={countriesData}>
+      <PaginationPageProvider data={filterCountriesData}>
         <CountryList />
         <PaginationPage />
       </PaginationPageProvider>
