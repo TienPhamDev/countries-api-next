@@ -1,5 +1,4 @@
 import MainComponent from "@/components/main/MainComponent";
-import StoreProvider from "./StoreProvider";
 
 export async function fetchAllCountry() {
   const res = await fetch(
